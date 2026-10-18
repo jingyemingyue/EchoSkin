@@ -1,73 +1,75 @@
 # skin.json specification
 
-Version: 1.0
+Version: **1.1** (tracks ReverbScope `main`, 0.5.0b3)
 
-Every EchoSkin theme is a folder containing `skin.json`, `theme.qss`, and `preview.png`. This document defines `skin.json`.
+A skin is a folder `themes/<id>/` with `skin.json`, `theme.qss` and `preview.png`.
+`scripts/check_skins.py` is the reference validator for this document.
 
-## Required fields
+## Important: ReverbScope main has no skin loader
 
-| Field | Type | Description |
+ReverbScope `main` has **no** Settings → Appearance → Import Skin, no `--stylesheet`
+option and no style-sheet environment variable. Its look is generated in
+`reverbscope/ui/theme.py` from `LIGHT_TOKENS` / `DARK_TOKENS` and applied by
+`apply_application_chrome()`, which replaces any Qt `-stylesheet` argument.
+
+Skins are applied only through the developer harness `scripts/preview_skin.py`,
+which overlays `tokens.colors` onto those dicts and appends `theme.qss` in its own
+process. It relies on **private** `theme.py` names that may change without notice;
+daily CI (`.github/workflows/check-skins.yml`) checks skins against `main` to catch it.
+Nothing on disk is modified; quitting restores the stock look.
+
+## Fields
+
+| Field | Req. | Description |
 | --- | --- | --- |
-| `id` | string | Unique skin id, lowercase, hyphens only, e.g. `"midnight-studio"` |
-| `name` | string | Display name, e.g. `"Midnight Studio"` |
-| `version` | string | Skin version (semver), e.g. `"1.0.0"` |
-| `author` | string | Author name or handle |
-| `description` | string | One-line English description |
-| `reverbscope.min_version` | string | Minimum supported ReverbScope version, e.g. `"0.5.0b3"` |
-| `files.stylesheet` | string | QSS filename, must be `"theme.qss"` |
-| `files.preview` | string | Preview image filename, must be `"preview.png"` |
+| `spec_version` | yes | `"1.1"` |
+| `id` | yes | lowercase-hyphen id, must equal the folder name |
+| `name`, `author`, `description` | yes | non-empty strings |
+| `version` | yes | skin version, semver (`"1.1.0"`) |
+| `base_scheme` | yes | `"light"` or `"dark"` — which stock token set the skin overlays |
+| `reverbscope.min_version` | yes | PEP 440, e.g. `"0.5.0b3"`; must not be newer than the checked `main` |
+| `reverbscope.max_version` | no | version or `null` (no upper bound) |
+| `reverbscope.loader` | yes | `"none"` today (harness only); `"builtin"` reserved for a future in-app loader |
+| `files.stylesheet` / `files.preview` | yes | exactly `"theme.qss"` / `"preview.png"` |
+| `description_zh`, `license`, `$schema` | no | optional metadata |
+| `tokens.colors` | no | colour overrides, see below |
 
-## Optional fields
+## tokens.colors
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `description_zh` | string | One-line Chinese description |
-| `license` | string | Skin license, default `"MIT"` |
-| `reverbscope.max_version` | string \| null | Maximum tested version, `null` = no upper bound |
-| `tokens` | object | Design tokens consumed by the skin loader (see below) |
+Keys are exactly ReverbScope main's 19 theme token names; unknown keys are warnings,
+missing keys fall back to the stock `base_scheme` value. Values are `#rrggbb`.
 
-## Design tokens
+`bg`, `surface`, `surface_alt`, `border`, `text`, `muted`, `accent`, `accent_hover`,
+`accent_text`, `accent_soft`, `good`, `good_soft`, `warn`, `warn_soft`, `bad`,
+`bad_soft`, `info`, `info_soft`, `grid`
 
-`tokens` mirrors ReverbScope's `ui/design/tokens.py`. The skin loader applies them to widgets and pyqtgraph plots that QSS cannot reach. All token fields are optional; missing fields fall back to ReverbScope defaults.
+Chart **series** colours are not tokens on main and are **not skinnable**; only
+`grid` and the surrounding chrome follow the skin.
 
-```json
-"tokens": {
-  "colors": {
-    "background": "#0e1116",
-    "surface": "#161b22",
-    "surface_raised": "#1c2330",
-    "text_primary": "#e6e9ee",
-    "text_secondary": "#9aa4b2",
-    "accent": "#1a7f8e",
-    "accent_hover": "#22a0b2",
-    "success": "#3fb950",
-    "warning": "#d29922",
-    "error": "#f85149",
-    "plot_curve": "#1a7f8e",
-    "plot_grid": "#2a3340"
-  },
-  "typography": {
-    "title_size_px": 20,
-    "title_weight": 700,
-    "kpi_size_px": 28,
-    "kpi_weight": 600,
-    "body_size_px": 13
-  },
-  "page_margin": 20,
-  "section_gap": 16,
-  "corner_radius": 6
-}
-```
+## theme.qss selectors
 
-Rules:
-- Colors must be `#rrggbb` hex.
-- `plot_curve` / `plot_grid` style pyqtgraph curves and grids.
-- QSS (`theme.qss`) and tokens must agree — do not define a color in one place and contradict it in the other.
+`theme.qss` is appended after the stock style sheet (later rules win). Target Qt
+widget classes plus the dynamic properties main actually sets, for example:
+
+- `QLabel[role="…"]`: `title`, `page-title`, `subtitle`, `section`, `hint`,
+  `kpi-label`, `kpi-value`, `kpi-sub`, `card-title`, `badge`, `pill`, `panel-title`, `count`
+- boolean properties (`[x="true"]`): `card`, `primary`, `danger`, `panel`, `page`,
+  `report`, `viewbar`, `subviewbar`, `viewtab`, `viewscroll`, `panelswitch`,
+  `projecttab`, `strip`, `measurements`, `hover`, `measuring`
+- valued properties: `phase`, `banner` (`warn`, `info`, …)
+
+Selectors that main does not use are reported by the checker. Colours in
+`theme.qss` should be values from the skin's own `tokens.colors`.
 
 ## Validation
 
-A skin folder is valid when:
-1. `skin.json` parses and contains all required fields.
-2. `theme.qss` exists and is non-empty.
-3. `preview.png` exists, is 1280×800, and is a real screenshot (not a mockup).
-4. `id` matches the folder name.
+`python scripts/check_skins.py --reverbscope <ReverbScope checkout> --strict`
+
+- **Errors:** invalid/missing fields, missing or empty `theme.qss`, `preview.png`
+  missing or not 1280×800.
+- **Warnings** (fail with `--strict`): unknown selectors or token keys,
+  `min_version` newer than main, a loader appearing on main while `loader` is
+  `"none"`, QSS colours outside the tokens, text/muted contrast below WCAG AA 4.5:1.
+
+`preview.png` must be a real screenshot, e.g. from
+`QT_QPA_PLATFORM=offscreen python scripts/preview_skin.py themes/<id> --reverbscope <checkout> --demo --out themes/<id>/preview.png`.

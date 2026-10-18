@@ -12,5 +12,5 @@ labels: theme
 - [ ] `skin.json` validates against docs/SKIN_SPEC.md
 - [ ] `theme.qss` is non-empty
 - [ ] `preview.png` is a real 1280×800 screenshot (not a mockup)
-- [ ] Tested on ReverbScope version: <!-- e.g. 0.5.0b4 -->
+- [ ] Tested on ReverbScope version: <!-- e.g. 0.5.0b3 (main commit) -->
 - [ ] I have rights to all included artwork
