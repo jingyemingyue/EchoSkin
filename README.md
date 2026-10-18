@@ -27,11 +27,16 @@ EchoSkin is a community theme library for [ReverbScope](https://github.com/jingy
 
 ## Install
 
-1. Download a skin folder (or `.zip`) from `themes/`.
-2. In ReverbScope, open **Settings → Appearance → Import Skin…** and pick the folder.
-3. The skin applies immediately. To go back, choose **Restore Default**.
+ReverbScope `main` (0.5.0b3) has **no built-in skin loader** — there is no "Import Skin" menu yet.
+For now skins are a developer preview, applied in-process by a harness that relies on private
+ReverbScope internals (it changes nothing on disk; closing the app restores the stock look):
 
-> Skin support requires ReverbScope 0.5.0b3 or newer. The appearance settings page is under development — check the [ReverbScope releases](https://github.com/jingyemingyue/ReverbScope/releases) for skin-loader availability.
+```bash
+git clone https://github.com/jingyemingyue/ReverbScope ../ReverbScope
+python scripts/preview_skin.py themes/midnight-studio --reverbscope ../ReverbScope
+```
+
+Chart series colours are not skinnable. CI checks every skin against ReverbScope `main` daily.
 
 ## Make a skin
 
