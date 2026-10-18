@@ -1,0 +1,112 @@
+/* EchoSkin sample theme: Midnight Studio
+ * Qt stylesheet for ReverbScope. Only visual properties — no behavior.
+ * Token source: themes/midnight-studio/skin.json -> tokens
+ */
+
+/* Base window */
+QMainWindow, QDialog {
+    background-color: #0e1116;
+    color: #e6e9ee;
+}
+
+/* Raised surfaces: cards, panels, drawers */
+QFrame#card, QFrame#panel, QDockWidget {
+    background-color: #161b22;
+    border: 1px solid #2a3340;
+    border-radius: 6px;
+}
+
+/* Primary text */
+QLabel {
+    color: #e6e9ee;
+}
+
+/* Secondary / muted text */
+QLabel[secondary="true"] {
+    color: #9aa4b2;
+}
+
+/* KPI numbers (overview page) */
+QLabel#kpiValue {
+    color: #e6e9ee;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* Section titles */
+QLabel#sectionTitle {
+    color: #e6e9ee;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* Buttons */
+QPushButton {
+    background-color: #1c2330;
+    color: #e6e9ee;
+    border: 1px solid #2a3340;
+    border-radius: 6px;
+    padding: 6px 14px;
+}
+QPushButton:hover {
+    background-color: #22a0b2;
+    border-color: #22a0b2;
+}
+QPushButton:pressed {
+    background-color: #1a7f8e;
+}
+QPushButton[primary="true"] {
+    background-color: #1a7f8e;
+    border-color: #1a7f8e;
+}
+QPushButton[primary="true"]:hover {
+    background-color: #22a0b2;
+}
+
+/* Inputs */
+QLineEdit, QComboBox, QSpinBox, QDoubleSpinBox {
+    background-color: #0e1116;
+    color: #e6e9ee;
+    border: 1px solid #2a3340;
+    border-radius: 6px;
+    padding: 4px 8px;
+}
+QLineEdit:focus, QComboBox:focus {
+    border-color: #1a7f8e;
+}
+
+/* Tabs */
+QTabWidget::pane {
+    border: 1px solid #2a3340;
+    border-radius: 6px;
+    background-color: #161b22;
+}
+QTabBar::tab {
+    background-color: #161b22;
+    color: #9aa4b2;
+    padding: 8px 16px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+QTabBar::tab:selected {
+    background-color: #1c2330;
+    color: #e6e9ee;
+}
+
+/* Scrollbars */
+QScrollBar:vertical {
+    background-color: #0e1116;
+    width: 10px;
+}
+QScrollBar::handle:vertical {
+    background-color: #2a3340;
+    border-radius: 5px;
+    min-height: 30px;
+}
+QScrollBar::handle:vertical:hover {
+    background-color: #1a7f8e;
+}
+
+/* Plots: pyqtgraph styling is applied from skin.json tokens.plot_*
+ * (plot_curve #1a7f8e, plot_grid #2a3340) via the skin loader,
+ * not from this stylesheet. */
