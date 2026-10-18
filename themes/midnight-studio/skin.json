@@ -1,1 +1,44 @@
-{"author": "EchoSkin team", "description": "Deep dark canvas with restrained teal accents. Built for long measurement sessions.", "description_zh": "\u6df1\u8272\u753b\u5e03\u914d\u514b\u5236\u9752\u8272\u70b9\u7f00\uff0c\u4e3a\u957f\u65f6\u95f4\u6d4b\u91cf\u5de5\u4f5c\u8bbe\u8ba1\u3002", "files": {"preview": "preview.png", "stylesheet": "theme.qss"}, "id": "midnight-studio", "license": "MIT", "name": "Midnight Studio", "reverbscope": {"max_version": null, "min_version": "0.5.0b3"}, "tokens": {"colors": {"accent": "#1a7f8e", "accent_hover": "#22a0b2", "background": "#0e1116", "error": "#f85149", "plot_curve": "#1a7f8e", "plot_grid": "#2a3340", "success": "#3fb950", "surface": "#161b22", "surface_raised": "#1c2330", "text_primary": "#e6e9ee", "text_secondary": "#9aa4b2", "warning": "#d29922"}, "corner_radius": 6, "page_margin": 20, "section_gap": 16, "typography": {"body_size_px": 13, "kpi_size_px": 28, "kpi_weight": 600, "title_size_px": 20, "title_weight": 700}}, "version": "1.0.0"}
+{
+  "$schema": "../../schema/skin.schema.json",
+  "spec_version": "1.1",
+  "id": "midnight-studio",
+  "name": "Midnight Studio",
+  "version": "1.1.0",
+  "author": "EchoSkin team",
+  "license": "MIT",
+  "description": "Deep dark canvas with restrained teal accents. Built for long measurement sessions.",
+  "description_zh": "深色画布配克制青色点缀，为长时间测量工作设计。",
+  "base_scheme": "dark",
+  "reverbscope": {
+    "min_version": "0.5.0b3",
+    "max_version": null,
+    "loader": "none"
+  },
+  "files": {
+    "stylesheet": "theme.qss",
+    "preview": "preview.png"
+  },
+  "tokens": {
+    "colors": {
+      "bg": "#0e1116",
+      "surface": "#161b22",
+      "surface_alt": "#1c2330",
+      "border": "#2a3340",
+      "text": "#e6e9ee",
+      "muted": "#9aa4b2",
+      "accent": "#3fb0bf",
+      "accent_hover": "#5cc3cf",
+      "accent_text": "#0b1014",
+      "accent_soft": "#173038",
+      "good": "#3fb950",
+      "good_soft": "#13281a",
+      "warn": "#d29922",
+      "warn_soft": "#2e2410",
+      "bad": "#f85149",
+      "bad_soft": "#3a1616",
+      "info": "#58a6ff",
+      "info_soft": "#142338",
+      "grid": "#3a4556"
+    }
+  }
+}
