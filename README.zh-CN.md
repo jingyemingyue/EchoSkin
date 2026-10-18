@@ -27,11 +27,15 @@ EchoSkin 是 [ReverbScope](https://github.com/jingyemingyue/ReverbScope) 的社�
 
 ## 安装
 
-1. 从 `themes/` 下载皮肤文件夹（或 `.zip`）。
-2. 在 ReverbScope 里打开 **设置 → 外观 → 导入皮肤…**，选择文件夹。
-3. 皮肤立即生效。恢复默认选 **恢复默认外观** 即可。
+ReverbScope `main`（0.5.0b3）**没有内置皮肤加载器**——目前还没有"导入皮肤"菜单。
+现阶段皮肤只是开发者预览：由一个脚本在进程内套用，它依赖 ReverbScope 的私有内部名称（不改动磁盘上任何文件，关闭程序即恢复原样）：
 
-> 皮肤功能需要 ReverbScope 0.5.0b3 或更新版本。外观设置页还在开发中——去 [ReverbScope releases](https://github.com/jingyemingyue/ReverbScope/releases) 确认皮肤加载器是否可用。
+```bash
+git clone https://github.com/jingyemingyue/ReverbScope ../ReverbScope
+python scripts/preview_skin.py themes/midnight-studio --reverbscope ../ReverbScope
+```
+
+图表曲线（series）颜色不能换肤。CI 每天会用 ReverbScope `main` 检查所有皮肤。
 
 ## 制作皮肤
 
