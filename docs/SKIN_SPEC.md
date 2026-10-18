@@ -13,7 +13,7 @@ Every EchoSkin theme is a folder containing `skin.json`, `theme.qss`, and `previ
 | `version` | string | Skin version (semver), e.g. `"1.0.0"` |
 | `author` | string | Author name or handle |
 | `description` | string | One-line English description |
-| `reverbscope.min_version` | string | Minimum supported ReverbScope version, e.g. `"0.5.0b4"` |
+| `reverbscope.min_version` | string | Minimum supported ReverbScope version, e.g. `"0.5.0b3"` |
 | `files.stylesheet` | string | QSS filename, must be `"theme.qss"` |
 | `files.preview` | string | Preview image filename, must be `"preview.png"` |
 

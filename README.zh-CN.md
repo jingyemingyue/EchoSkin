@@ -31,7 +31,7 @@ EchoSkin 是 [ReverbScope](https://github.com/jingyemingyue/ReverbScope) 的社�
 2. 在 ReverbScope 里打开 **设置 → 外观 → 导入皮肤…**，选择文件夹。
 3. 皮肤立即生效。恢复默认选 **恢复默认外观** 即可。
 
-> 皮肤功能需要 ReverbScope 0.5.0b4 或更新版本。外观设置页还在开发中——去 [ReverbScope releases](https://github.com/jingyemingyue/ReverbScope/releases) 确认皮肤加载器是否可用。
+> 皮肤功能需要 ReverbScope 0.5.0b3 或更新版本。外观设置页还在开发中——去 [ReverbScope releases](https://github.com/jingyemingyue/ReverbScope/releases) 确认皮肤加载器是否可用。
 
 ## 制作皮肤
 

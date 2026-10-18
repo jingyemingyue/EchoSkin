@@ -31,7 +31,7 @@ EchoSkin is a community theme library for [ReverbScope](https://github.com/jingy
 2. In ReverbScope, open **Settings → Appearance → Import Skin…** and pick the folder.
 3. The skin applies immediately. To go back, choose **Restore Default**.
 
-> Skin support requires ReverbScope 0.5.0b4 or newer. The appearance settings page is under development — check the [ReverbScope releases](https://github.com/jingyemingyue/ReverbScope/releases) for skin-loader availability.
+> Skin support requires ReverbScope 0.5.0b3 or newer. The appearance settings page is under development — check the [ReverbScope releases](https://github.com/jingyemingyue/ReverbScope/releases) for skin-loader availability.
 
 ## Make a skin
 
